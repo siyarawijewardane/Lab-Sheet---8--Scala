@@ -1,50 +1,18 @@
-object StringProcessing {
+object Question03{
 
-  def toUpper(string: String): String = {
-    string.toUpperCase()
-  }
+    val names = List ("Benny", "Niroshan", "Saman", "Kumara")
 
-  def toLower(string: String): String = {
-    string.toLowerCase()
-  }
+    def toUpper: String => String = _.toUpperCase()
+    def toLower: String => String = _.toLowerCase()
 
-  def firstTwoUpper(string: String): String = {
-    val len = string.length
+    def formatNames: (String, String => String) => String = (name, func) => func(name)
 
-    if (len < 2) {
-      " "
-    } else {
-      if (len == 2) {
-        toUpper(string)
-      } else {
-        toUpper(string.substring(0, 2)) + toLower(string.substring(2, len))
-      }
+    def main(args: Array[String]): Unit = {
+
+      println(formatNames(names(0), toUpper))
+      print(formatNames(names(1), toUpper).substring(0, 2) + formatNames(names(1).substring(2, 8), toLower) + "\n")
+      println(formatNames(names(2), toLower))
+      print(names(3).substring(0, 5) + formatNames(names(3).substring(5, 6), toUpper))
     }
-  }
 
-  def firstandLastToUpper(string: String): String = {
-    val len = string.length
-
-    if (len < 2) {
-      " "
-    } else {
-      if (len == 2) {
-        toUpper(string)
-      } else {
-        toUpper(string.substring(0, 1)) + toLower(string.substring(1, len - 1)) + toUpper(string.substring(len - 1, len))
-      }
-    }
-  }
-
-  def formatNames(name: String, modifier: String => String): String = {
-    val modifiedName = modifier(name)
-    modifiedName
-  }
-
-  def main(args: Array[String]): Unit = {
-    println(formatNames("Benny", name => toUpper(name)))
-    println(formatNames("Niroshan", name => firstTwoUpper(name)))
-    println(formatNames("Saman", name => toLower(name)))
-    println(formatNames("Kumara", name => firstandLastToUpper(name)))
-  }
 }

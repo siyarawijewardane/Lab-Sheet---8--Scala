@@ -1,23 +1,22 @@
 import scala.io.StdIn
 
-object NumberClassification {
+object Question02{
+
+    def printMessage: Int => String = {
+        
+        case n if n <= 0 => "Negative/Zero is given"
+        case n if n % 2 == 0 => "Even number is given"
+        case n => "Odd number is given"
+    }
 
     def main(args: Array[String]): Unit = {
 
-        println("Enter the value : ")
+        print("Enter an integer : ")
         val input = StdIn.readInt()
-
-        val result = input match {
-
-        case x if x <= 0 => "Negative/Zero"
-        case x if x % 2 == 0 => "Even Number"
-        case x if x % 2 != 0 => "Odd Number"
-
-        }
-
-        print(result)
-
+        println(printMessage(input))
     }
-    
+
 }
+    
+
 
